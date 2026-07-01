@@ -28,7 +28,7 @@ Tugas 9
 │   └── footer.php
 │
 ├── koneksi.php
-├── index.php
+├── dashboard.php
 │
 ├── input_dosen.php
 ├── data_dosen.php
@@ -40,7 +40,7 @@ Tugas 9
 ├── edit_mahasiswa.php
 ├── hapus_mahasiswa.php
 │
-└── db_kampus.sql
+└── database_kampus.sql
 ```
 
 ---
