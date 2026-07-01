@@ -1,4 +1,36 @@
 <?php
+$title = "Input Mahasiswa";
+
+include "koneksi.php";
+
+if(isset($_POST['simpan'])){
+
+    $nama = trim($_POST['nama_mahasiswa']);
+    $npm  = trim($_POST['npm']);
+
+    if($nama != "" && $npm != ""){
+
+        $query = mysqli_query($koneksi,
+        "INSERT INTO mahasiswa(npm,nama_mahasiswa)
+        VALUES('$npm','$nama')");
+
+        if($query){
+            echo "<script>
+                    window.location='data_mahasiswa.php';
+                  </script>";
+        }else{
+            echo "<script>
+                    alert('Gagal menyimpan data');
+                  </script>";
+        }
+
+    }else{
+        echo "<script>
+                alert('Semua data harus diisi');
+              </script>";
+    }
+}
+
 include "template/header.php";
 include "template/sidebar.php";
 ?>
@@ -38,94 +70,23 @@ include "template/sidebar.php";
                   <div class="card-header">
                     <div class="card-title">Input Data Mahasiswa</div>
                   </div>
-                  <form class="needs-validation" novalidate>
+                  <form method="POST" class="needs-validation" novalidate>
                     <div class="card-body">
                       <div class="row g-3">
                         <div class="col-md-6">
-                          <label for="validationCustom01" class="form-label">First name</label>
-                          <input
-                            type="text"
-                            class="form-control"
-                            id="validationCustom01"
-                            value="Mark"
-                            required
-                          />
-                          <div class="valid-feedback">Looks good!</div>
+                          <label for="nama_mahasiswa" class="form-label">Nama Lengkap</label>
+                          <input type="text" class="form-control" name="nama_mahasiswa" required/>
+                          <div class="invalid-feedback">Nama mahasiswa wajib diisi.</div>
                         </div>
                         <div class="col-md-6">
-                          <label for="validationCustom02" class="form-label">Last name</label>
-                          <input
-                            type="text"
-                            class="form-control"
-                            id="validationCustom02"
-                            value="Otto"
-                            required
-                          />
-                          <div class="valid-feedback">Looks good!</div>
-                        </div>
-                        <div class="col-md-6">
-                          <label for="validationCustomUsername" class="form-label">Username</label>
-                          <div class="input-group has-validation">
-                            <span class="input-group-text" id="inputGroupPrepend">@</span>
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="validationCustomUsername"
-                              aria-describedby="inputGroupPrepend"
-                              required
-                            />
-                            <div class="invalid-feedback">Please choose a username.</div>
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <label for="validationCustom03" class="form-label">City</label>
-                          <input
-                            type="text"
-                            class="form-control"
-                            id="validationCustom03"
-                            required
-                          />
-                          <div class="invalid-feedback">Please provide a valid city.</div>
-                        </div>
-                        <div class="col-md-6">
-                          <label for="validationCustom04" class="form-label">State</label>
-                          <select class="form-select" id="validationCustom04" required>
-                            <option selected disabled value="">Choose&hellip;</option>
-                            <option>California</option>
-                            <option>Washington</option>
-                            <option>Tennessee</option>
-                          </select>
-                          <div class="invalid-feedback">Please select a valid state.</div>
-                        </div>
-                        <div class="col-md-6">
-                          <label for="validationCustom05" class="form-label">Zip</label>
-                          <input
-                            type="text"
-                            class="form-control"
-                            id="validationCustom05"
-                            required
-                          />
-                          <div class="invalid-feedback">Please provide a valid zip.</div>
-                        </div>
-                        <div class="col-12">
-                          <div class="form-check">
-                            <input
-                              class="form-check-input"
-                              type="checkbox"
-                              value=""
-                              id="invalidCheck"
-                              required
-                            />
-                            <label class="form-check-label" for="invalidCheck">
-                              Agree to terms and conditions
-                            </label>
-                            <div class="invalid-feedback">You must agree before submitting.</div>
-                          </div>
+                          <label for="npm" class="form-label">NPM</label>
+                          <input type="text" class="form-control" name="npm" required/>
+                          <div class="invalid-feedback">NPM wajib diisi.</div>
                         </div>
                       </div>
                     </div>
                     <div class="card-footer">
-                      <button class="btn btn-info" type="submit">Submit form</button>
+                      <button class="btn btn-info" type="submit" name="simpan">Simpan Data</button>
                     </div>
                   </form>
                 </div>

@@ -1,6 +1,14 @@
 <?php
+$title = "Dashboard";
 include "template/header.php";
 include "template/sidebar.php";
+include "koneksi.php";
+
+$hitungDosen = mysqli_query($koneksi, "SELECT COUNT(*) AS total FROM dosen");
+$jumlahDosen = mysqli_fetch_assoc($hitungDosen);
+
+$hitungMahasiswa = mysqli_query($koneksi, "SELECT COUNT(*) AS total FROM mahasiswa");
+$jumlahMahasiswa = mysqli_fetch_assoc($hitungMahasiswa);
 ?>
 
       <!--begin::App Main-->
@@ -37,7 +45,7 @@ include "template/sidebar.php";
                 <!--begin::Small Box Widget 1-->
                 <div class="small-box text-bg-primary">
                   <div class="inner">
-                    <h3>150</h3>
+                    <h3><?= $jumlahDosen['total']; ?></h3>
 
                     <p>Dosen Aktif</p>
                   </div>
@@ -66,7 +74,7 @@ include "template/sidebar.php";
                 <!--begin::Small Box Widget 2-->
                 <div class="small-box text-bg-success">
                   <div class="inner">
-                    <h3>1200</h3>
+                    <h3><?= $jumlahMahasiswa['total']; ?></h3>
 
                     <p>Mahasiswa Aktif</p>
                   </div>
